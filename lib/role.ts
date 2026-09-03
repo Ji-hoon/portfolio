@@ -40,18 +40,23 @@ export const ROLE_LABEL: Record<Role, { ko: string; en: string }> = {
  * og/twitter 공통 세트 — layout 기본값과 홈 generateMetadata가 공유한다.
  * 페이지에서 openGraph를 정의하면 layout 것과 병합되지 않고 통째로 교체되므로,
  * siteName·locale·type까지 포함한 완전한 세트를 항상 이 헬퍼로 만든다.
+ * og/twitter title만 역할 명칭(영문)으로 분기한다 — <title>·og 이미지는 고정.
  */
-export const buildSocialMeta = (description: string) => ({
-  openGraph: {
-    title: SITE_TITLE,
-    description,
-    siteName: SITE_TITLE,
-    locale: "ko_KR",
-    type: "website" as const,
-  },
-  twitter: {
-    card: "summary_large_image" as const,
-    title: SITE_TITLE,
-    description,
-  },
-});
+export const buildSocialMeta = (description: string, role: Role = "frontend") => {
+  const title = `${SITE_TITLE} — ${ROLE_LABEL[role].en}`;
+
+  return {
+    openGraph: {
+      title,
+      description,
+      siteName: SITE_TITLE,
+      locale: "ko_KR",
+      type: "website" as const,
+    },
+    twitter: {
+      card: "summary" as const,
+      title,
+      description,
+    },
+  };
+};

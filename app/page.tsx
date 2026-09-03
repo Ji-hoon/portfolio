@@ -12,8 +12,9 @@ import Contact from "@/components/contact";
 export async function generateMetadata({
   searchParams,
 }: PageProps<"/">): Promise<Metadata> {
-  const description = ROLE_DESCRIPTION[resolveRole((await searchParams).r)];
-  const social = buildSocialMeta(description);
+  const role = resolveRole((await searchParams).r);
+  const description = ROLE_DESCRIPTION[role];
+  const social = buildSocialMeta(description, role);
 
   return {
     description,

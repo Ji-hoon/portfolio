@@ -93,7 +93,7 @@ summary {
 }
 
 .role-roller.is-loaded {
-  animation: role-roll 6s cubic-bezier(0.52, 0.53, 0.12, 0.89) infinite;
+  animation: role-roll 5s cubic-bezier(0.52, 0.53, 0.12, 0.89) infinite;
 }
 
 @keyframes role-roll {
