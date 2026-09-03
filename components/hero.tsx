@@ -13,7 +13,7 @@ export default function Hero({ srRole }: { srRole?: ReactNode }) {
   return (
     <section id="home" className="mb-32 scroll-mt-28 pt-16 md:mb-48 md:pt-24">
       <Reveal>
-        <h1 className="mb-24 max-w-[1200px] break-keep text-4xl font-semibold leading-[1.3] tracking-tight md:mb-32 md:text-5xl lg:text-[4rem]">
+        <h1 className="mb-24 max-w-[1200px] break-keep font-semibold leading-[1.3] tracking-tight md:mb-32 text-[3rem] md:text-[3.5rem] lg:text-[4rem]">
           {ui.hero.headline[lang]}
           {srRole}
           <RoleSlot lang={lang} />
