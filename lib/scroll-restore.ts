@@ -71,16 +71,12 @@ function clamp(value: number, min: number, max: number) {
 /**
  * `html` sets `scroll-behavior: smooth`, so a restore must land in one frame
  * instead of triggering an animation that the next measurement could chase.
- * Direct `scrollTop` assignment avoids relying on CSS scroll behavior.
+ * Plain `scrollTop` assignment does NOT bypass that (per spec it scrolls with
+ * behavior "auto", which resolves to the computed smooth) — only an explicit
+ * `behavior: "instant"` lands synchronously.
  */
 function jumpTo(top: number) {
-  // Direct scrollTop assignment is synchronous and does not depend on the
-  // browser supporting the non-universal `behavior: "instant"` option.
-  if (document.scrollingElement) {
-    document.scrollingElement.scrollTop = top;
-  }
-  document.documentElement.scrollTop = top;
-  document.body.scrollTop = top;
+  window.scrollTo({ top, behavior: "instant" });
 }
 
 export function captureScrollSnapshot(preferredAnchor?: HTMLElement | null): ScrollSnapshot {

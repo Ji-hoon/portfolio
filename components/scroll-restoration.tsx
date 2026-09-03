@@ -50,6 +50,28 @@ export default function ScrollRestoration() {
       historyTraversalRef.current = true;
     };
 
+    // Next 16 intercepts back/forward through the Navigation API where the
+    // browser has it, and commits the new route BEFORE popstate fires — a
+    // popstate flag would always arrive one navigation late (and then leak
+    // into the next non-traversal navigation). `navigate` fires at traversal
+    // start, so listen to it when available; popstate stays as the fallback
+    // for browsers without the API, where Next still routes via popstate.
+    const navigation = (
+      window as unknown as { navigation?: EventTarget }
+    ).navigation;
+    if (navigation) {
+      const onNavigate = (event: Event) => {
+        if (
+          (event as Event & { navigationType?: string }).navigationType ===
+          "traverse"
+        ) {
+          markHistoryTraversal();
+        }
+      };
+      navigation.addEventListener("navigate", onNavigate);
+      return () => navigation.removeEventListener("navigate", onNavigate);
+    }
+
     window.addEventListener("popstate", markHistoryTraversal);
     return () => window.removeEventListener("popstate", markHistoryTraversal);
   }, []);
@@ -231,24 +253,67 @@ function scrollToRouteTarget() {
 }
 
 function restoreRouteTarget() {
-  const deadline = performance.now() + RESTORE_FRAME_MS;
+  // No hash: a single instant jump to the top, as before.
+  if (window.location.hash.length <= 1) {
+    scrollToRouteTarget();
+    return () => {};
+  }
+
+  // A hash section can stream in well after commit (the page's data resolves
+  // on the server first), and content above it keeps settling after that — so
+  // wait for the element within the settle window, then hold the position with
+  // the same frame-burst + resize pinning the snapshot restore uses. Deliberate
+  // user input outranks the hold.
   let frame = 0;
+  let frameDeadline = 0;
+  let stopped = false;
+  let found = false;
 
-  const attempt = () => {
-    const hash = window.location.hash;
-    const target = getHashTarget();
-    if (target || !hash || performance.now() >= deadline) {
-      scrollToRouteTarget();
-      frame = 0;
-      return;
-    }
-    frame = window.requestAnimationFrame(attempt);
-  };
+  const observer = new ResizeObserver(() => {
+    if (found && !stopped) scrollToRouteTarget();
+  });
 
-  attempt();
-  return () => {
+  const stop = () => {
+    stopped = true;
     if (frame) window.cancelAnimationFrame(frame);
+    frame = 0;
+    window.clearTimeout(settleTimer);
+    observer.disconnect();
+    for (const event of USER_SCROLL_EVENTS) {
+      window.removeEventListener(event, stop);
+    }
   };
+
+  const settleTimer = window.setTimeout(() => {
+    // The anchor never appeared (broken hash): fall back to the top, as before.
+    if (!found) scrollToRouteTarget();
+    stop();
+  }, RESTORE_SETTLE_MS);
+
+  const step = () => {
+    if (stopped) return;
+    if (!found) {
+      if (!getHashTarget()) {
+        frame = window.requestAnimationFrame(step);
+        return;
+      }
+      found = true;
+      frameDeadline = performance.now() + RESTORE_FRAME_MS;
+      observer.observe(document.body);
+      observer.observe(document.documentElement);
+    }
+    scrollToRouteTarget();
+    frame =
+      performance.now() < frameDeadline
+        ? window.requestAnimationFrame(step)
+        : 0;
+  };
+
+  for (const event of USER_SCROLL_EVENTS) {
+    window.addEventListener(event, stop, { passive: true });
+  }
+  step();
+  return stop;
 }
 
 function getHashTarget() {
@@ -275,11 +340,10 @@ function jumpTo(top: number) {
     0,
   );
   const clampedTop = Math.min(Math.max(top, 0), maxScrollTop);
-  if (document.scrollingElement) {
-    document.scrollingElement.scrollTop = clampedTop;
-  }
-  document.documentElement.scrollTop = clampedTop;
-  document.body.scrollTop = clampedTop;
+  // `html`의 scroll-behavior: smooth 아래에서 scrollTop 대입은 애니메이션이
+  // 되고, 라우터의 자체 스크롤과 경합하면 중간에 취소되어 엉뚱한 위치에
+  // 멈춘다 — 라우트 스크롤은 instant로 동기 착지시킨다.
+  window.scrollTo({ top: clampedTop, behavior: "instant" });
 }
 
 function isListPathname(pathname: string) {
