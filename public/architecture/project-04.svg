@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420" role="img" aria-label="Logimate ERP architecture: Figma and Storybook as the shared design reference, shared custom hooks feeding fulfillment screens, a gradual JS to TypeScript migration, and the initiatives led from requirements to implementation">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#334155"/></marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#94a3b8" flood-opacity=".18"/></filter>
+  </defs>
+  <rect width="1000" height="420" rx="24" fill="#f8fafc"/>
+  <text x="36" y="40" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2" fill="#64748b">LOGIMATE ERP · ONE REFERENCE, MANY SCREENS</text>
+
+  <path d="M253 122H273" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M490 122H510" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M727 122H747" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="36" y="76" width="217" height="92" rx="16" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+    <rect x="273" y="76" width="217" height="92" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <rect x="510" y="76" width="217" height="92" rx="16" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <rect x="747" y="76" width="217" height="92" rx="16" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  </g>
+
+  <g font-family="Arial,sans-serif" fill="#0f172a">
+    <text x="56" y="106" font-size="15" font-weight="700">Figma</text>
+    <text x="56" y="128" font-size="12" fill="#475569">renewal spec · interaction</text>
+    <text x="56" y="147" font-size="12" fill="#475569">one agreed reference</text>
+
+    <text x="293" y="106" font-size="15" font-weight="700">Storybook</text>
+    <text x="293" y="128" font-size="12" fill="#475569">shared UI components</text>
+    <text x="293" y="147" font-size="12" fill="#475569">in-house design system</text>
+
+    <text x="530" y="106" font-size="15" font-weight="700">Custom hooks</text>
+    <text x="530" y="128" font-size="12" fill="#475569">list query · client filter</text>
+    <text x="530" y="147" font-size="12" fill="#475569">one place to change</text>
+
+    <text x="767" y="106" font-size="15" font-weight="700">ERP screens</text>
+    <text x="767" y="128" font-size="12" fill="#475569">parcel · order · inventory</text>
+    <text x="767" y="147" font-size="12" fill="#475569">fulfillment operations</text>
+  </g>
+
+  <rect x="36" y="196" width="928" height="92" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="56" y="222" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5" fill="#64748b">JS → TYPESCRIPT, PATTERN BY PATTERN</text>
+  <text x="944" y="222" text-anchor="end" font-family="Arial,sans-serif" font-size="11.5" fill="#64748b">screen by screen, no big-bang rewrite</text>
+  <path d="M306 253H326" stroke="#334155" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <path d="M536 253H556" stroke="#334155" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <g filter="url(#shadow)">
+    <rect x="56" y="234" width="250" height="38" rx="12" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="326" y="234" width="210" height="38" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="556" y="234" width="210" height="38" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  </g>
+  <g font-family="Arial,sans-serif" font-size="12.5" font-weight="700" fill="#0f172a">
+    <text x="74" y="258">legacy Presenter/Container</text>
+    <text x="344" y="258">function components</text>
+    <text x="574" y="258">shared custom hooks</text>
+  </g>
+
+  <rect x="36" y="306" width="928" height="88" rx="16" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="56" y="332" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5" fill="#64748b">LED FROM REQUIREMENTS TO IMPLEMENTATION</text>
+  <g filter="url(#shadow)">
+    <rect x="56" y="344" width="280" height="38" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="356" y="344" width="280" height="38" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="656" y="344" width="280" height="38" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  </g>
+  <g font-family="Arial,sans-serif" font-size="12.5" font-weight="700" fill="#0f172a">
+    <text x="74" y="368">Vite frontend rebuild</text>
+    <text x="374" y="368">AI agent E2E dashboard</text>
+    <text x="674" y="368">AI assistant + doc search</text>
+  </g>
+</svg>

@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #111111;
+  --color-muted: #6b7280;
+  --color-surface: #f3f4f6;
+
+  /* GNB switches to the hamburger dropdown at 640px and below. */
+  --breakpoint-gnb: 641px;
+}
+
+@theme inline {
+  --font-sans:
+    var(--font-inter), "Pretendard", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  background-color: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+a[href],
+button:not(:disabled),
+[role="button"],
+[role="tab"],
+summary {
+  cursor: pointer;
+}
+
+/* Animate on scroll (from sample/example01.html) */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Masked vertical role rotation in the hero headline */
+.role-viewport {
+  --role-step: 1.3em;
+  --role-line-height: 1.3;
+  display: inline-block;
+  height: var(--role-step);
+  max-width: 100%;
+  overflow: hidden;
+  vertical-align: bottom;
+  color: #2563eb;
+  line-height: var(--role-line-height);
+  white-space: nowrap;
+}
+
+.role-viewport-en {
+  --role-step: 1.3em;
+  --role-line-height: 1.3;
+}
+
+.role-roller {
+  display: block;
+  height: calc(3 * var(--role-step));
+  line-height: var(--role-line-height);
+  animation: none;
+}
+
+.role-roller > span {
+  display: block;
+  height: var(--role-step);
+  line-height: var(--role-line-height);
+}
+
+/* 회전 항은 DOM 텍스트로 노출되면 추출 시 전부 이어 붙어 긁히므로
+   pseudo-element로 그린다. 읽히는 역할 명칭은 h1의 sr-only 하나뿐이다. */
+.role-roller > span::after {
+  content: attr(data-label);
+}
+
+.role-roller.is-loaded {
+  animation: role-roll 6s cubic-bezier(0.52, 0.53, 0.12, 0.89) infinite;
+}
+
+@keyframes role-roll {
+  0%,
+  25% {
+    transform: translateY(0);
+  }
+  35%,
+  70% {
+    transform: translateY(calc(-1 * var(--role-step)));
+  }
+  80%,
+  100% {
+    transform: translateY(calc(-2 * var(--role-step)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .role-roller {
+    animation: none;
+  }
+}
+
+/* Mobile nav dropdown entrance */
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-panel {
+  animation: dropdown-in 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Work card hover lift */
+.work-card {
+  transition: transform 0.3s ease-out;
+}
+
+.work-card:hover {
+  transform: translateY(-4px);
+}

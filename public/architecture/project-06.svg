@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420" role="img" aria-label="Save Budget architecture: a React client and Express API in one repository, Recoil and TanStack Query splitting view and server state, MongoDB storage, and the product flows for infinite lists, date-range charts, and member invitations">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#334155"/></marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#94a3b8" flood-opacity=".18"/></filter>
+  </defs>
+  <rect width="1000" height="420" rx="24" fill="#f8fafc"/>
+  <text x="36" y="40" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2" fill="#64748b">SAVE BUDGET · ONE REPOSITORY, CLIENT AND SERVER</text>
+
+  <path d="M253 122H273" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M490 122H510" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M727 122H747" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="36" y="76" width="217" height="92" rx="16" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+    <rect x="273" y="76" width="217" height="92" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <rect x="510" y="76" width="217" height="92" rx="16" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <rect x="747" y="76" width="217" height="92" rx="16" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  </g>
+
+  <g font-family="Arial,sans-serif" fill="#0f172a">
+    <text x="56" y="106" font-size="15" font-weight="700">React client</text>
+    <text x="56" y="128" font-size="12" fill="#475569">Vite · styled-components</text>
+    <text x="56" y="147" font-size="12" fill="#475569">router · portal · responsive</text>
+
+    <text x="293" y="106" font-size="15" font-weight="700">State split</text>
+    <text x="293" y="128" font-size="12" fill="#475569">Recoil + TanStack Query</text>
+    <text x="293" y="147" font-size="12" fill="#475569">view state vs server state</text>
+
+    <text x="530" y="106" font-size="15" font-weight="700">Express API</text>
+    <text x="530" y="128" font-size="12" fill="#475569">expense · asset · member</text>
+    <text x="530" y="147" font-size="12" fill="#475569">JWT auth · Mongoose</text>
+
+    <text x="767" y="106" font-size="15" font-weight="700">MongoDB</text>
+    <text x="767" y="128" font-size="12" fill="#475569">transactions · assets</text>
+    <text x="767" y="147" font-size="12" fill="#475569">schema per domain</text>
+  </g>
+
+  <text x="36" y="192" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5" fill="#94a3b8">PRODUCT FLOWS</text>
+
+  <g filter="url(#shadow)">
+    <rect x="36" y="200" width="296" height="88" rx="16" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+    <rect x="352" y="200" width="296" height="88" rx="16" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+    <rect x="668" y="200" width="296" height="88" rx="16" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+  </g>
+
+  <g font-family="Arial,sans-serif" fill="#0f172a">
+    <text x="56" y="230" font-size="15" font-weight="700">Infinite list</text>
+    <text x="56" y="252" font-size="12" fill="#475569">infiniteQuery · fetchStatus</text>
+    <text x="56" y="271" font-size="12" fill="#475569">loader driven by hasNextPage</text>
+
+    <text x="372" y="230" font-size="15" font-weight="700">Range + charts</text>
+    <text x="372" y="252" font-size="12" fill="#475569">date-fns · react-day-picker</text>
+    <text x="372" y="271" font-size="12" fill="#475569">nivo asset graphs</text>
+
+    <text x="688" y="230" font-size="15" font-weight="700">Member invite</text>
+    <text x="688" y="252" font-size="12" fill="#475569">mustache template + nodemailer</text>
+    <text x="688" y="271" font-size="12" fill="#475569">invite page signs them up</text>
+  </g>
+
+  <rect x="36" y="306" width="928" height="88" rx="16" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="56" y="332" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5" fill="#64748b">WHAT KEEPS THE LISTS HONEST</text>
+  <g filter="url(#shadow)">
+    <rect x="56" y="344" width="430" height="38" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="506" y="344" width="438" height="38" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  </g>
+  <g font-family="Arial,sans-serif" font-size="12.5" font-weight="700" fill="#0f172a">
+    <text x="74" y="368">cache invalidation after every mutation</text>
+    <text x="524" y="368">React Portal UI + media-query responsive</text>
+  </g>
+</svg>

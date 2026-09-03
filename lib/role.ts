@@ -1,0 +1,31 @@
+export const ROLES = ["frontend", "design", "product"] as const;
+export type Role = (typeof ROLES)[number];
+
+const isRole = (value: unknown): value is Role =>
+  typeof value === "string" && (ROLES as readonly string[]).includes(value);
+
+/** `?r=` 판별 — 알 수 없는 값·누락은 전부 기본값(frontend)으로 떨어진다. */
+export const resolveRole = (raw?: string | string[]): Role => {
+  const value = Array.isArray(raw) ? raw[0] : raw;
+  return isRole(value) ? value : "frontend";
+};
+
+/** 역할별 meta description — title은 고정, description만 갈린다. */
+export const ROLE_DESCRIPTION: Record<Role, string> = {
+  frontend:
+    "10년 이상 SaaS/B2B 프로덕트를 개선해 온 디자인 경험과 2년 이상의 프론트엔드 개발 실무 역량을 기반으로 사용자 경험과 비즈니스 요구사항을 함께 설계/구현하는 프론트엔드 개발자입니다.",
+  design:
+    "10년 이상 SaaS/B2B 프로덕트를 개선해 온 디자인 경험과 2년 이상의 프론트엔드 개발 실무 역량을 기반으로 사용자 경험과 비즈니스 요구사항을 함께 설계/구현하는 디자인 엔지니어입니다.",
+  product:
+    "10년 이상 SaaS/B2B 프로덕트를 개선해 온 디자인 경험과 2년 이상의 프론트엔드 개발 실무 역량을 기반으로 제품 정의부터 배포, AI를 개발 프로세스와 제품에 넣고 운영 경계까지 설계하는 프로덕트 엔지니어입니다.",
+};
+
+/**
+ * 히어로 회전 슬롯 대신 스크린리더·텍스트 추출에 노출되는 단일 역할 명칭.
+ * 회전 슬롯 자체는 세 변형 공통(디자이너 ⇄ 엔지니어)으로 고정이다.
+ */
+export const ROLE_LABEL: Record<Role, { ko: string; en: string }> = {
+  frontend: { ko: "프론트엔드 엔지니어", en: "Frontend Engineer" },
+  design: { ko: "디자인 엔지니어", en: "Design Engineer" },
+  product: { ko: "프로덕트 엔지니어", en: "Product Engineer" },
+};

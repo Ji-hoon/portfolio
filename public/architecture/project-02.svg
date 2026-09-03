@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420" role="img" aria-label="AI agent E2E test automation architecture: Google Sheets as test-case source of truth, a file job queue, an Express worker launching headless Claude agents through Playwright MCP, shared JSON results, unattended guards, and the two-level state model">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#334155"/></marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#94a3b8" flood-opacity=".18"/></filter>
+  </defs>
+  <rect width="1000" height="420" rx="24" fill="#f8fafc"/>
+  <text x="36" y="40" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2" fill="#64748b">AI AGENT E2E TESTS · UNATTENDED PIPELINE</text>
+
+  <path d="M196 126H216" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M376 126H396" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M576 126H596" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M766 126H786" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M486 206V178" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M875 172V200" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="36" y="80" width="160" height="92" rx="16" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+    <rect x="216" y="80" width="160" height="92" rx="16" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+    <rect x="396" y="80" width="180" height="92" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <rect x="596" y="80" width="170" height="92" rx="16" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <rect x="786" y="80" width="178" height="92" rx="16" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <rect x="36" y="206" width="540" height="88" rx="16" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <rect x="596" y="206" width="368" height="88" rx="16" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+  </g>
+
+  <g font-family="Arial,sans-serif" fill="#0f172a">
+    <text x="56" y="110" font-size="15" font-weight="700">Google Sheets</text>
+    <text x="56" y="132" font-size="12" fill="#475569">test-case SSOT</text>
+    <text x="56" y="151" font-size="12" fill="#475569">synced, not deployed</text>
+
+    <text x="236" y="110" font-size="15" font-weight="700">File job queue</text>
+    <text x="236" y="132" font-size="12" fill="#475569">run · chunk · resume</text>
+    <text x="236" y="151" font-size="12" fill="#475569">state per case</text>
+
+    <text x="416" y="110" font-size="15" font-weight="700">Express worker</text>
+    <text x="416" y="132" font-size="12" fill="#475569">claude -p headless agent</text>
+    <text x="416" y="151" font-size="12" fill="#475569">concurrency 2 (measured)</text>
+
+    <text x="616" y="110" font-size="15" font-weight="700">Playwright MCP</text>
+    <text x="616" y="132" font-size="12" fill="#475569">real browser run</text>
+    <text x="616" y="151" font-size="12" fill="#475569">evidence per case</text>
+
+    <text x="806" y="110" font-size="15" font-weight="700">Result JSON</text>
+    <text x="806" y="132" font-size="12" fill="#475569">342 / 342 passing</text>
+    <text x="806" y="151" font-size="12" fill="#475569">one shared source</text>
+
+    <text x="56" y="236" font-size="15" font-weight="700">Unattended guards</text>
+    <text x="56" y="258" font-size="12" fill="#475569">token budget · 429 automatic pause and resume</text>
+    <text x="56" y="277" font-size="12" fill="#475569">battery power · OAuth expiry · shutdown webhook</text>
+
+    <text x="616" y="236" font-size="15" font-weight="700">Dashboard + report webhook</text>
+    <text x="616" y="258" font-size="12" fill="#475569">one JSON, two consumers</text>
+    <text x="616" y="277" font-size="12" fill="#475569">22 spreadsheet upload formats covered</text>
+  </g>
+
+  <rect x="36" y="310" width="928" height="86" rx="16" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="56" y="336" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5" fill="#64748b">STATE MODEL · ALLOWED OPERATIONS FIXED PER STATE</text>
+  <g filter="url(#shadow)">
+    <rect x="56" y="346" width="440" height="40" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="516" y="346" width="428" height="40" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  </g>
+  <g font-family="Arial,sans-serif" font-size="12.5" fill="#0f172a">
+    <text x="76" y="371">Test — idle · in-progress · pause · resume · terminating</text>
+    <text x="536" y="371">Case — idle · in-progress · done</text>
+  </g>
+</svg>

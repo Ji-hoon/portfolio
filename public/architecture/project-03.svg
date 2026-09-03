@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420" role="img" aria-label="Moviq AI Light architecture: one dynamic route composing a renderKey, registries resolving renderer and API and grid and labeling, six-layer Feature-Sliced Design, three state tiers, screen assembly, UI system, API layer, and a seven-agent development pipeline">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#334155"/></marker>
+    <marker id="arrowMuted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#94a3b8"/></marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#94a3b8" flood-opacity=".18"/></filter>
+  </defs>
+  <rect width="1000" height="420" rx="24" fill="#f8fafc"/>
+  <text x="36" y="40" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2" fill="#64748b">MOVIQ AI LIGHT · REGISTRY-DRIVEN REACT SPA</text>
+
+  <path d="M253 122H273" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M490 122H510" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M727 122H747" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M144 168V184" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M381 168V184" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M618 168V184" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M855 168V184" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M144 184H855" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M184 184V200" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowMuted)"/>
+  <path d="M500 184V200" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowMuted)"/>
+  <path d="M816 184V200" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowMuted)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="36" y="76" width="217" height="92" rx="16" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+    <rect x="273" y="76" width="217" height="92" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <rect x="510" y="76" width="217" height="92" rx="16" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <rect x="747" y="76" width="217" height="92" rx="16" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <rect x="36" y="200" width="296" height="88" rx="16" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+    <rect x="352" y="200" width="296" height="88" rx="16" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+    <rect x="668" y="200" width="296" height="88" rx="16" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+  </g>
+
+  <g font-family="Arial,sans-serif" fill="#0f172a">
+    <text x="56" y="106" font-size="15" font-weight="700">Dynamic route</text>
+    <text x="56" y="128" font-size="12" fill="#475569">/app/:screenUrl/:tabUrl</text>
+    <text x="56" y="147" font-size="12" fill="#475569">one route, 30 screens</text>
+
+    <text x="293" y="106" font-size="15" font-weight="700">Registries</text>
+    <text x="293" y="128" font-size="12" fill="#475569">renderKey = screen_tab</text>
+    <text x="293" y="147" font-size="12" fill="#475569">renderer 30 · api 27 · grid</text>
+
+    <text x="530" y="106" font-size="15" font-weight="700">FSD · 6 layers</text>
+    <text x="530" y="128" font-size="12" fill="#475569">app → pages → widgets</text>
+    <text x="530" y="147" font-size="12" fill="#475569">features → entities → shared</text>
+
+    <text x="767" y="106" font-size="15" font-weight="700">State · 3 tiers</text>
+    <text x="767" y="128" font-size="12" fill="#475569">Zustand 10 stores</text>
+    <text x="767" y="147" font-size="12" fill="#475569">Context 3 · TanStack Query</text>
+
+    <text x="56" y="230" font-size="15" font-weight="700">Screen assembly</text>
+    <text x="56" y="252" font-size="12" fill="#475569">PageInteraction store per renderKey</text>
+    <text x="56" y="271" font-size="12" fill="#475569">TypedEmitter: row · cell · action</text>
+
+    <text x="372" y="230" font-size="15" font-weight="700">UI system</text>
+    <text x="372" y="252" font-size="12" fill="#475569">Radix UI + vanilla-extract + Tailwind 4</text>
+    <text x="372" y="271" font-size="12" fill="#475569">AG Grid 35 · portal cell editor</text>
+
+    <text x="688" y="230" font-size="15" font-weight="700">API layer</text>
+    <text x="688" y="252" font-size="12" fill="#475569">one axios client · 1s duplicate guard</text>
+    <text x="688" y="271" font-size="12" fill="#475569">refresh: Web Locks + BroadcastChannel</text>
+  </g>
+
+  <rect x="36" y="306" width="928" height="88" rx="16" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="56" y="332" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5" fill="#64748b">AI DEVELOPMENT PIPELINE · 7 AGENTS</text>
+  <text x="944" y="332" text-anchor="end" font-family="Arial,sans-serif" font-size="11" fill="#64748b">306 docs · plan → results → done → rules</text>
+  <path d="M174 363H186" stroke="#334155" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <path d="M304 363H316" stroke="#334155" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <path d="M456 363H468" stroke="#334155" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <path d="M628 363H640" stroke="#334155" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <path d="M780 363H792" stroke="#334155" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <g filter="url(#shadow)">
+    <rect x="56" y="344" width="118" height="38" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="186" y="344" width="118" height="38" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="316" y="344" width="140" height="38" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="468" y="344" width="160" height="38" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="640" y="344" width="140" height="38" rx="12" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="792" y="344" width="152" height="38" rx="12" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+  </g>
+  <g font-family="Arial,sans-serif" font-size="12.5" font-weight="700" fill="#0f172a">
+    <text x="74" y="368">planner</text>
+    <text x="204" y="368">admin</text>
+    <text x="334" y="368">implementer</text>
+    <text x="486" y="368">verifiers ×2</text>
+    <text x="658" y="368">reviewer</text>
+    <text x="810" y="368">registry-auditor</text>
+  </g>
+</svg>

@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 344" role="img" aria-label="CS 접수부터 답변까지의 흐름. 외부 서버의 질문 접수가 파일 업로드, 시트 채번, 슬랙 알림을 거치고, 담당자는 슬랙 버튼의 쿼리스트링 URL로 관리자 화면을 열어 답변한 뒤 시트 갱신과 고객 메일 발송이 일어난다.">
+  <style>
+    .d-box { fill: #ffffff; stroke: rgba(15, 20, 27, 0.11); stroke-width: 1.25; }
+    .d-box-acc { fill: rgba(17, 70, 182, 0.07); stroke: rgba(17, 70, 182, 0.28); stroke-width: 1.25; }
+    .d-box-ext { fill: rgba(15, 122, 107, 0.09); stroke: #0f7a6b; stroke-width: 1.1; }
+    .d-t { fill: #0f141b; font-family: Arial, "Apple SD Gothic Neo", sans-serif; font-size: 13px; font-weight: 650; letter-spacing: -0.01em; }
+    .d-s { fill: #3b4552; font-family: Arial, "Apple SD Gothic Neo", sans-serif; font-size: 11.5px; }
+    .d-l { fill: #737e8d; font-family: "SFMono-Regular", Menlo, Consolas, monospace; font-size: 10.5px; letter-spacing: 0.02em; }
+    .d-la { fill: #1146b6; font-family: "SFMono-Regular", Menlo, Consolas, monospace; font-size: 10.5px; font-weight: 500; }
+    .d-cap { fill: #737e8d; font-family: "SFMono-Regular", Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.09em; }
+    .d-ln { stroke: #3b4552; stroke-width: 1.3; fill: none; }
+    .d-note-bg { fill: #f0f3f7; stroke: rgba(15, 20, 27, 0.07); stroke-width: 1; }
+    .d-ln-a { stroke: #1146b6; stroke-width: 1.6; fill: none; }
+    .d-div { stroke: rgba(15, 20, 27, 0.11); stroke-width: 1; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 8" refX="6.5" refY="4" markerWidth="4" markerHeight="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="#3b4552" />
+    </marker>
+    <marker id="arrow-accent" viewBox="0 0 10 8" refX="6.5" refY="4" markerWidth="4" markerHeight="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="#1146b6" />
+    </marker>
+  </defs>
+
+  <text class="d-cap" x="16" y="18">접수 (외부 서버 → CORS)</text>
+  <text class="d-cap" x="352" y="18">전달 매체</text>
+  <text class="d-cap" x="622" y="18">답변 (담당자)</text>
+
+  <!-- intake -->
+  <rect class="d-box" x="16" y="30" width="210" height="46" rx="4" />
+  <text class="d-t" x="30" y="52">사내 앱에서 질문 접수</text>
+  <text class="d-s" x="30" y="68">userId · category · content · 첨부</text>
+
+  <path class="d-ln" d="M121 76 L 121 96" marker-end="url(#arrow)" />
+  <rect class="d-box-ext" x="16" y="100" width="210" height="46" rx="4" />
+  <text class="d-t" x="30" y="122">POST /api/saveFile</text>
+  <text class="d-s" x="30" y="138">Supabase Storage · 5MB · 확장자 검사</text>
+
+  <path class="d-ln" d="M121 146 L 121 166" marker-end="url(#arrow)" />
+  <rect class="d-box-acc" x="16" y="170" width="210" height="70" rx="4" />
+  <text class="d-t" x="30" y="192">POST /api/updateSheet</text>
+  <text class="d-s" x="30" y="210">기존 행을 읽어 csSeq 채번</text>
+  <text class="d-la" x="30" y="230">LC2025-B0626-00000001</text>
+
+  <path class="d-ln" d="M121 240 L 121 260" marker-end="url(#arrow)" />
+  <rect class="d-box" x="16" y="264" width="210" height="46" rx="4" />
+  <text class="d-t" x="30" y="286">POST /api/sendWebhook</text>
+  <text class="d-s" x="30" y="302">CS 전용 채널로 Block Kit 발송</text>
+
+  <!-- medium -->
+  <rect class="d-box-ext" x="290" y="100" width="240" height="140" rx="4" />
+  <text class="d-t" x="304" y="124">Slack 메시지</text>
+  <text class="d-s" x="304" y="144">접수번호 · 질문자 · 연락처 · 내용</text>
+  <line class="d-div" x1="304" y1="158" x2="516" y2="158" />
+  <text class="d-t" x="304" y="180">[ 답변하기 ] 버튼</text>
+  <text class="d-la" x="304" y="200">?csSeq=…&amp;userId=…</text>
+  <text class="d-la" x="304" y="216">&amp;phone=…&amp;email=…</text>
+  <text class="d-la" x="304" y="232">&amp;category=…&amp;content=…</text>
+
+  <path class="d-ln-a" d="M226 287 C 258 287, 258 190, 284 190" marker-end="url(#arrow-accent)" />
+  <path class="d-ln" d="M226 184 C 254 184, 254 62, 268 62 L 380 62 C 394 62, 398 68, 398 94" marker-end="url(#arrow)" />
+  <rect class="d-note-bg" x="266" y="44" width="116" height="36" rx="6" />
+  <text class="d-l" x="324" y="58" text-anchor="middle">시트에도 동일 URL을</text>
+  <text class="d-l" x="324" y="73" text-anchor="middle">HYPERLINK로 기록</text>
+
+  <!-- reply -->
+  <path class="d-ln-a" d="M530 170 L 592 170" marker-end="url(#arrow-accent)" />
+  <text class="d-la" x="561" y="163" text-anchor="middle">클릭</text>
+
+  <rect class="d-box-acc" x="598" y="100" width="266" height="88" rx="4" />
+  <text class="d-t" x="612" y="122">/admin/customerService</text>
+  <text class="d-s" x="612" y="142">서버 컴포넌트가 searchParams를</text>
+  <text class="d-s" x="612" y="160">ReplyForm 초기값으로 그대로 전달</text>
+  <text class="d-la" x="612" y="180">조회 API 없음 — URL이 곧 레코드</text>
+
+  <path class="d-ln" d="M731 188 L 731 210" marker-end="url(#arrow)" />
+  <rect class="d-box" x="598" y="214" width="266" height="42" rx="4" />
+  <text class="d-t" x="612" y="236">답변 작성 · 첨부 (선택)</text>
+  <text class="d-s" x="612" y="251">첨부 시 reply- 접두로 재업로드</text>
+
+  <path class="d-ln" d="M676 256 C 676 278, 660 278, 660 292" marker-end="url(#arrow)" />
+  <path class="d-ln" d="M796 256 C 796 278, 812 278, 812 292" marker-end="url(#arrow)" />
+
+  <rect class="d-box-ext" x="598" y="296" width="128" height="42" rx="4" />
+  <text class="d-t" x="612" y="316">PUT updateSheet</text>
+  <text class="d-l" x="612" y="332">I·J·K·L·R 열 갱신</text>
+
+  <rect class="d-box-ext" x="736" y="296" width="128" height="42" rx="4" />
+  <text class="d-t" x="750" y="316">POST sendEmail</text>
+  <text class="d-l" x="750" y="332">고객에게 회신</text>
+</svg>

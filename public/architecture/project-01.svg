@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420" role="img" aria-label="ERP AI assistant turn architecture: three entry points, four pre-gates, a worker thread holding the RAG and tool-calling layers, an SSE contract, and two-phase mutation outside the turn">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#334155"/></marker>
+    <marker id="arrowMuted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#94a3b8"/></marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#94a3b8" flood-opacity=".18"/></filter>
+  </defs>
+  <rect width="1000" height="420" rx="24" fill="#f8fafc"/>
+  <text x="36" y="40" font-family="Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2" fill="#64748b">ERP AI ASSISTANT · ONE TURN, THREE LAYERS</text>
+
+  <g font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5" fill="#94a3b8">
+    <text x="36" y="64">REQUEST THREAD</text>
+    <text x="404" y="64">WORKER THREAD · 180s BUDGET · MAX 4 LLM CALLS</text>
+  </g>
+
+  <rect x="404" y="72" width="400" height="248" rx="20" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 5"/>
+
+  <path d="M196 126H216" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M384 126H404" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M596 148H612" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M804 126H824" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M510 192V212" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5 4"/>
+  <path d="M698 192V212" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5 4"/>
+
+  <g filter="url(#shadow)">
+    <rect x="36" y="80" width="160" height="92" rx="16" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2"/>
+    <rect x="216" y="80" width="168" height="92" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <rect x="424" y="104" width="172" height="88" rx="16" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <rect x="612" y="104" width="172" height="88" rx="16" fill="#ffe4e6" stroke="#e11d48" stroke-width="2"/>
+    <rect x="424" y="212" width="360" height="86" rx="16" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+    <rect x="824" y="72" width="140" height="248" rx="16" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  </g>
+
+  <g font-family="Arial,sans-serif" fill="#0f172a">
+    <text x="56" y="110" font-size="15" font-weight="700">Entry points</text>
+    <text x="56" y="132" font-size="12" fill="#475569">home · FAB · chips</text>
+    <text x="56" y="151" font-size="12" fill="#475569">one chat state</text>
+
+    <text x="236" y="110" font-size="15" font-weight="700">Pre-gates ×4</text>
+    <text x="236" y="132" font-size="12" fill="#475569">enabled · budget</text>
+    <text x="236" y="151" font-size="12" fill="#475569">in-flight · dup turn</text>
+
+    <text x="444" y="134" font-size="15" font-weight="700">L2 · RAG</text>
+    <text x="444" y="156" font-size="12" fill="#475569">search_docs tool</text>
+    <text x="444" y="175" font-size="12" fill="#475569">RRF k=60 → top 5</text>
+
+    <text x="632" y="134" font-size="15" font-weight="700">L3 · Tools</text>
+    <text x="632" y="156" font-size="12" fill="#475569">25 declared tools</text>
+    <text x="632" y="175" font-size="12" fill="#475569">mutations propose</text>
+
+    <text x="444" y="242" font-size="15" font-weight="700">Tool loop</text>
+    <text x="444" y="264" font-size="12" fill="#475569">max 3 tool round-trips + 1 final call</text>
+    <text x="444" y="283" font-size="12" fill="#475569">24k prefix frozen · history max 12 messages</text>
+
+    <text x="844" y="100" font-size="14" font-weight="700">SSE contract</text>
+    <g font-size="12" fill="#166534">
+      <text x="844" y="126">meta</text>
+      <text x="844" y="146">block_start</text>
+      <text x="844" y="166">block_delta*</text>
+      <text x="844" y="186">tool_status*</text>
+      <text x="844" y="206">block (final)</text>
+      <text x="844" y="226">done</text>
+    </g>
+    <g font-size="11" fill="#475569">
+      <text x="844" y="254">15s heartbeat</text>
+      <text x="844" y="272">no buffering</text>
+      <text x="844" y="298">detach ≠ cancel</text>
+    </g>
+  </g>
+
+  <rect x="36" y="196" width="348" height="112" rx="14" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <g font-family="Arial,sans-serif">
+    <text x="56" y="222" font-size="13" font-weight="700" fill="#0f172a">Rejected before the stream opens</text>
+    <text x="56" y="246" font-size="12" fill="#475569">503 kill switch · 429 weekly shared budget</text>
+    <text x="56" y="265" font-size="12" fill="#475569">429 in-flight — 8 global / 2 per user</text>
+    <text x="56" y="284" font-size="12" fill="#475569">409 a turn is already open in this chat</text>
+  </g>
+
+  <text x="520" y="336" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5" fill="#94a3b8">TWO-PHASE MUTATION — THE TURN ONLY PROPOSES</text>
+  <path d="M460 298V318H141V350" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrowMuted)"/>
+  <path d="M246 373H266" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M436 373H456" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M706 373H726" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="36" y="350" width="210" height="46" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <rect x="266" y="350" width="170" height="46" rx="12" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+    <rect x="456" y="350" width="250" height="46" rx="12" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+    <rect x="726" y="350" width="238" height="46" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  </g>
+  <g font-family="Arial,sans-serif">
+    <text x="52" y="371" font-size="13" font-weight="700" fill="#0f172a">Confirm card · PROPOSED</text>
+    <text x="52" y="387" font-size="11" fill="#475569">args stored on the server</text>
+    <text x="282" y="371" font-size="13" font-weight="700" fill="#0f172a">User presses it</text>
+    <text x="282" y="387" font-size="11" fill="#475569">no button, no execution</text>
+    <text x="472" y="371" font-size="13" font-weight="700" fill="#0f172a">POST …/execute</text>
+    <text x="472" y="387" font-size="11" fill="#475569">ownership + permission re-check</text>
+    <text x="742" y="371" font-size="13" font-weight="700" fill="#0f172a">EXECUTED / FAILED</text>
+    <text x="742" y="387" font-size="11" fill="#475569">record block, server values only</text>
+  </g>
+</svg>
