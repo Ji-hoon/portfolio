@@ -5,6 +5,7 @@ import "./globals.css";
 import {
   ROLES,
   ROLE_DESCRIPTION,
+  ROLE_STORAGE_KEY,
   SITE_TITLE,
   SITE_URL,
   buildSocialMeta,
@@ -42,10 +43,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <head>
-        {/* 첫 페인트 전에 ?r을 html[data-r]로 옮겨 역할 변형이 스치는 것을 막는다 */}
+        {/* 첫 페인트 전에 ?r을 html[data-r]로 옮겨 역할 변형이 스치는 것을 막고,
+            진입 역할은 세션에 보존해 Header 로고가 홈 경로(/?r=)에 복원한다 */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `document.documentElement.dataset.r=(location.search.match(/[?&]r=(${ROLES.join("|")})(?:&|$)/)||[])[1]||"frontend";`,
+            __html: `var r=(location.search.match(/[?&]r=(${ROLES.join("|")})(?:&|$)/)||[])[1];if(r)try{sessionStorage.setItem(${JSON.stringify(ROLE_STORAGE_KEY)},r)}catch(e){}document.documentElement.dataset.r=r||"frontend";`,
           }}
         />
         <link

@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { roleQuery, useEntryRole } from "@/lib/entry-role";
 import { ui, type Lang } from "@/lib/i18n";
 import {
   persistLanguageForReload,
   useLanguageStore,
 } from "@/lib/language-store";
+import type { Role } from "@/lib/role";
 
 const MENU = [
   { id: "projects", label: ui.nav.projects },
@@ -21,6 +23,10 @@ export default function Header() {
   const isHome = pathname === "/";
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
+
+  // Role captured from the entry `?r=` (persisted per tab by the layout inline
+  // script before hydration). Every home-bound link rides it along.
+  const entryRole = useEntryRole();
 
   // Close the mobile dropdown on outside click / Escape.
   useEffect(() => {
@@ -57,13 +63,16 @@ export default function Header() {
     >
       <div className="mx-auto max-w-[1200px] px-0 md:px-6 lg:px-6">
         <div className="flex items-center justify-between py-6">
-          {/* Logo → home */}
-          {isHome ? (
+          {/* Logo → home; an entry `?r=` rides along so the role variant survives */}
+          {isHome && !entryRole ? (
             <a href="#home" className="text-base font-medium tracking-tight">
               {ui.logo[lang]}
             </a>
           ) : (
-            <Link href="/" className="text-base font-medium tracking-tight">
+            <Link
+              href={`/${roleQuery(entryRole)}${isHome ? "#home" : ""}`}
+              className="text-base font-medium tracking-tight"
+            >
               {ui.logo[lang]}
             </Link>
           )}
@@ -74,6 +83,7 @@ export default function Header() {
               <NavItems
                 isHome={isHome}
                 lang={lang}
+                entryRole={entryRole}
                 className="transition-colors hover:text-blue-600"
               />
             </nav>
@@ -144,6 +154,7 @@ export default function Header() {
             <NavItems
               isHome={isHome}
               lang={lang}
+              entryRole={entryRole}
               onNavigate={closeMenu}
               className="px-6 py-3 transition-colors hover:bg-surface hover:text-blue-600"
             />
@@ -157,25 +168,31 @@ export default function Header() {
 function NavItems({
   isHome,
   lang,
+  entryRole,
   className,
   onNavigate,
 }: {
   isHome: boolean;
   lang: Lang;
+  entryRole: Role | null;
   className: string;
   onNavigate?: () => void;
 }) {
+  // Every nav link rides the entry `?r=` along, same as the logo, so the role
+  // variant survives any route the visitor takes back to home.
+  const query = roleQuery(entryRole);
+
   return (
     <>
       {MENU.map((item) => {
         const isContact = item.id === "contact";
         const href = isContact
-          ? isHome
+          ? isHome && !entryRole
             ? "#contact"
-            : "/#contact"
-          : `/${item.id}`;
+            : `/${query}#contact`
+          : `/${item.id}${query}`;
 
-        return isContact && isHome ? (
+        return isContact && isHome && !entryRole ? (
           <a
             key={item.id}
             href={href}

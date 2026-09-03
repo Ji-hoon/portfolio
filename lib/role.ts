@@ -10,6 +10,20 @@ export const SITE_URL = "https://www.jihoonkim.com";
 const isRole = (value: unknown): value is Role =>
   typeof value === "string" && (ROLES as readonly string[]).includes(value);
 
+/** 진입 `?r=`을 탭 세션 동안 보존하는 키 — layout 인라인 스크립트가 쓰고 Header가 읽는다. */
+export const ROLE_STORAGE_KEY = "portfolio-role";
+
+/** 진입 시 `?r=`로 저장된 역할 — 없거나 storage 접근이 막혀 있으면 null. */
+export const readStoredRole = (): Role | null => {
+  if (typeof window === "undefined") return null;
+  try {
+    const value = window.sessionStorage.getItem(ROLE_STORAGE_KEY);
+    return isRole(value) ? value : null;
+  } catch {
+    return null;
+  }
+};
+
 /** `?r=` 판별 — 알 수 없는 값·누락은 전부 기본값(frontend)으로 떨어진다. */
 export const resolveRole = (raw?: string | string[]): Role => {
   const value = Array.isArray(raw) ? raw[0] : raw;

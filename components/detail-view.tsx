@@ -6,6 +6,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { LuChevronLeft, LuList } from "react-icons/lu";
 import { FiX } from "react-icons/fi";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { roleQuery, useEntryRole } from "@/lib/entry-role";
 import { ui } from "@/lib/i18n";
 import { workCache } from "@/lib/work-cache";
 import { useLanguageStore } from "@/lib/language-store";
@@ -49,6 +50,7 @@ function getTocClickOffset(id: string, items: TocItem[]) {
 
 export default function DetailView({ id }: { id: string }) {
   const router = useRouter();
+  const entryRole = useEntryRole();
   const lang = useLanguageStore((state) => state.lang);
   const { data: item } = useSuspenseQuery(workCache.itemOptions(id));
   const labels = ui.detail;
@@ -163,7 +165,11 @@ export default function DetailView({ id }: { id: string }) {
           if (window.history.length > 1) {
             router.back();
           } else {
-            router.push(item.type === "project" ? "/projects" : "/archives");
+            // Direct entries have no history — send the list page the entry
+            // `?r=` too, matching the header links.
+            router.push(
+              `${item.type === "project" ? "/projects" : "/archives"}${roleQuery(entryRole)}`,
+            );
           }
         }}
         aria-label={labels.back[lang]}
