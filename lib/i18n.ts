@@ -11,8 +11,8 @@ export const ui = {
   },
   hero: {
     headline: {
-      ko: "10년의 프로덕트 디자인 경험 위에서, ",
-      en: "With 10 years in product design, I’m a ",
+      ko: "10+년의 프로덕트 디자인 경험 위에서, ",
+      en: "With 10+ years in product design, I’m a ",
     },
     headlineAfterRole: {
       ko: "로서 사용자 경험과 비즈니스 요구사항을 함께 설계하고 구현합니다.",

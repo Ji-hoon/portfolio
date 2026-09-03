@@ -24,8 +24,7 @@ function getTocFocusMarker() {
   const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
   const headerOffset = getHeaderOffset();
   return (
-    headerOffset +
-    Math.max(viewportHeight - headerOffset, 0) * TOC_FOCUS_RATIO
+    headerOffset + Math.max(viewportHeight - headerOffset, 0) * TOC_FOCUS_RATIO
   );
 }
 
@@ -34,9 +33,7 @@ function getTocClickOffset(id: string, items: TocItem[]) {
   const section = document.getElementById(id);
   const itemIndex = items.findIndex((item) => item.id === id);
   const nextItem = itemIndex >= 0 ? items[itemIndex + 1] : undefined;
-  const nextSection = nextItem
-    ? document.getElementById(nextItem.id)
-    : null;
+  const nextSection = nextItem ? document.getElementById(nextItem.id) : null;
 
   if (!section || !nextSection) return headerOffset;
 
@@ -94,7 +91,8 @@ export default function DetailView({ id }: { id: string }) {
     const section = document.getElementById(id);
     const clickPosition = getTocClickOffset(id, tocItems);
     pendingTocIdRef.current =
-      section && Math.abs(section.getBoundingClientRect().top - clickPosition) > 4
+      section &&
+      Math.abs(section.getBoundingClientRect().top - clickPosition) > 4
         ? id
         : null;
     setActiveTocId(id);
@@ -196,7 +194,7 @@ export default function DetailView({ id }: { id: string }) {
             : labels.archive[lang]}{" "}
           · {item.year} · {item.category}
         </p>
-        <h1 className="max-w-4xl text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+        <h1 className="break-keep text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
           {item.title[lang]}
         </h1>
       </header>

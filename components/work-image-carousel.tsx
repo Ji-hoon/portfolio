@@ -31,7 +31,7 @@ export default function WorkImageCarousel({
   const [overlayIndex, setOverlayIndex] = useState(0);
   const [detailVisibleCount, setDetailVisibleCount] = useState(1);
   const [selfHovered, setSelfHovered] = useState(false);
-  /* 틴트 배경은 이미지 로딩이 끝난 뒤에만 — 로딩 중 파란 박스가 비치지 않도록 */
+  /* 틴트 배경은 이미지 로딩 완료 && 호버에만 — 로딩 중이나 비호버에 파란 박스가 비치지 않도록 */
   const [loadedSrcs, setLoadedSrcs] = useState<Set<string>>(new Set());
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
@@ -229,7 +229,7 @@ export default function WorkImageCarousel({
           {slides.map((src, index) => (
             <div
               key={src}
-              className={`relative h-full shrink-0 ${detail ? `group/media ${loadedSrcs.has(src) ? "bg-[#2563eb]" : "bg-surface"}` : ""}`}
+              className={`relative h-full shrink-0 ${detail ? `group/media bg-surface ${loadedSrcs.has(src) ? "hover:bg-[#2563eb]" : ""}` : ""}`}
               style={
                 detail
                   ? { width: `${100 / detailVisibleCount}%` }
@@ -246,7 +246,7 @@ export default function WorkImageCarousel({
                     ? "(max-width: 640px) 100vw, (max-width: 960px) 33vw, 25vw"
                     : "(max-width: 640px) 100vw, (max-width: 960px) 50vw, 33vw"
                 }
-                className={`object-cover ${canOpenOverlay ? "cursor-pointer" : ""} ${detail ? "transition-opacity duration-300 group-hover/media:opacity-50" : ""}`}
+                className={`object-cover ${canOpenOverlay ? "cursor-pointer" : ""} ${detail ? "transition-opacity duration-300 group-hover/media:opacity-70" : ""}`}
                 onLoad={
                   detail
                     ? () =>

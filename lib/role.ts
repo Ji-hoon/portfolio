@@ -33,11 +33,11 @@ export const resolveRole = (raw?: string | string[]): Role => {
 /** 역할별 meta description — title은 고정, description만 갈린다. */
 export const ROLE_DESCRIPTION: Record<Role, string> = {
   frontend:
-    "10년 이상 SaaS/B2B 프로덕트를 개선해 온 디자인 경험과 2년 이상의 프론트엔드 개발 실무 역량을 기반으로 사용자 경험과 비즈니스 요구사항을 함께 설계/구현하는 프론트엔드 개발자입니다.",
+    "10+년 이상 SaaS/B2B 프로덕트를 개선해 온 디자인 경험과 2년 이상의 프론트엔드 개발 실무 역량을 기반으로 사용자 경험과 비즈니스 요구사항을 함께 설계/구현하는 프론트엔드 개발자입니다.",
   design:
-    "10년 이상 SaaS/B2B 프로덕트를 개선해 온 디자인 경험과 2년 이상의 프론트엔드 개발 실무 역량을 기반으로 사용자 경험과 비즈니스 요구사항을 함께 설계/구현하는 디자인 엔지니어입니다.",
+    "10+년 이상 SaaS/B2B 프로덕트를 개선해 온 디자인 경험과 2년 이상의 프론트엔드 개발 실무 역량을 기반으로 사용자 경험과 비즈니스 요구사항을 함께 설계/구현하는 디자인 엔지니어입니다.",
   product:
-    "10년 이상 SaaS/B2B 프로덕트를 개선해 온 디자인 경험과 2년 이상의 프론트엔드 개발 실무 역량을 기반으로 제품 정의부터 배포, AI를 개발 프로세스와 제품에 넣고 운영 경계까지 설계하는 프로덕트 엔지니어입니다.",
+    "10+년 이상 SaaS/B2B 프로덕트를 개선해 온 디자인 경험과 2년 이상의 프론트엔드 개발 실무 역량을 기반으로 제품 정의부터 배포, AI를 개발 프로세스와 제품에 넣고 운영 경계까지 설계하는 프로덕트 엔지니어입니다.",
 };
 
 /**
@@ -56,7 +56,10 @@ export const ROLE_LABEL: Record<Role, { ko: string; en: string }> = {
  * siteName·locale·type까지 포함한 완전한 세트를 항상 이 헬퍼로 만든다.
  * og/twitter title만 역할 명칭(영문)으로 분기한다 — <title>·og 이미지는 고정.
  */
-export const buildSocialMeta = (description: string, role: Role = "frontend") => {
+export const buildSocialMeta = (
+  description: string,
+  role: Role = "frontend",
+) => {
   const title = `${SITE_TITLE} — ${ROLE_LABEL[role].en}`;
 
   return {
