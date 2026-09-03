@@ -2,7 +2,12 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
-import { ROLE_DESCRIPTION, SITE_TITLE } from "@/lib/role";
+import {
+  ROLE_DESCRIPTION,
+  SITE_TITLE,
+  SITE_URL,
+  buildSocialMeta,
+} from "@/lib/role";
 import { Providers } from "@/components/providers";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -22,8 +27,10 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: SITE_TITLE,
   description: ROLE_DESCRIPTION.frontend,
+  ...buildSocialMeta(ROLE_DESCRIPTION.frontend),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

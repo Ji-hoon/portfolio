@@ -4,6 +4,9 @@ export type Role = (typeof ROLES)[number];
 /** 사이트 공통 title — 역할과 무관하게 고정, layout과 og/twitter가 공유한다. */
 export const SITE_TITLE = "Jihoon Kim";
 
+/** 배포 도메인 — metadataBase·canonical·og:url이 공유한다. */
+export const SITE_URL = "https://www.jihoonkim.com";
+
 const isRole = (value: unknown): value is Role =>
   typeof value === "string" && (ROLES as readonly string[]).includes(value);
 
@@ -32,3 +35,23 @@ export const ROLE_LABEL: Record<Role, { ko: string; en: string }> = {
   design: { ko: "디자인 엔지니어", en: "Design Engineer" },
   product: { ko: "프로덕트 엔지니어", en: "Product Engineer" },
 };
+
+/**
+ * og/twitter 공통 세트 — layout 기본값과 홈 generateMetadata가 공유한다.
+ * 페이지에서 openGraph를 정의하면 layout 것과 병합되지 않고 통째로 교체되므로,
+ * siteName·locale·type까지 포함한 완전한 세트를 항상 이 헬퍼로 만든다.
+ */
+export const buildSocialMeta = (description: string) => ({
+  openGraph: {
+    title: SITE_TITLE,
+    description,
+    siteName: SITE_TITLE,
+    locale: "ko_KR",
+    type: "website" as const,
+  },
+  twitter: {
+    card: "summary_large_image" as const,
+    title: SITE_TITLE,
+    description,
+  },
+});

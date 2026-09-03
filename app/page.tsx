@@ -4,22 +4,23 @@ import { HydrationBoundary } from "@tanstack/react-query";
 import { getArchives, getProjects } from "@/lib/content";
 import { dehydrateWorks } from "@/lib/hydrate";
 import { workCache } from "@/lib/work-cache";
-import { ROLE_DESCRIPTION, resolveRole } from "@/lib/role";
+import { ROLE_DESCRIPTION, buildSocialMeta, resolveRole } from "@/lib/role";
 import Hero, { SrRole } from "@/components/hero";
 import WorkSection from "@/components/work-section";
 import Contact from "@/components/contact";
-
-const TITLE = "Jihoon Kim";
 
 export async function generateMetadata({
   searchParams,
 }: PageProps<"/">): Promise<Metadata> {
   const description = ROLE_DESCRIPTION[resolveRole((await searchParams).r)];
+  const social = buildSocialMeta(description);
 
   return {
     description,
-    openGraph: { title: TITLE, description },
-    twitter: { card: "summary", title: TITLE, description },
+    // 역할 변형은 쿼리 파라미터일 뿐이므로 색인은 기본 URL 하나로 통합한다
+    alternates: { canonical: "/" },
+    openGraph: { ...social.openGraph, url: "/" },
+    twitter: social.twitter,
   };
 }
 
