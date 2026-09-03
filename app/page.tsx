@@ -5,7 +5,7 @@ import { getArchives, getProjects } from "@/lib/content";
 import { dehydrateWorks } from "@/lib/hydrate";
 import { workCache } from "@/lib/work-cache";
 import { ROLE_DESCRIPTION, buildSocialMeta, resolveRole } from "@/lib/role";
-import Hero, { SrRole } from "@/components/hero";
+import Hero, { RoleSlot } from "@/components/hero";
 import WorkSection from "@/components/work-section";
 import Contact from "@/components/contact";
 
@@ -24,13 +24,13 @@ export async function generateMetadata({
   };
 }
 
-/** searchParams는 여기서만 await — sr 텍스트 한 조각 밖은 정적 셸로 남는다. */
-async function ResolvedSrRole({
+/** searchParams는 여기서만 await — 역할 슬롯 한 조각 밖은 정적 셸로 남는다. */
+async function ResolvedRoleSlot({
   searchParams,
 }: {
   searchParams: PageProps<"/">["searchParams"];
 }) {
-  return <SrRole role={resolveRole((await searchParams).r)} />;
+  return <RoleSlot role={resolveRole((await searchParams).r)} />;
 }
 
 export default async function Home({ searchParams }: PageProps<"/">) {
@@ -51,9 +51,9 @@ export default async function Home({ searchParams }: PageProps<"/">) {
     <HydrationBoundary state={state}>
       <main className="mx-auto w-full max-w-[1200px] px-0 md:px-6 lg:px-6 md:px-6 lg:px-6">
         <Hero
-          roleText={
-            <Suspense fallback={null}>
-              <ResolvedSrRole searchParams={searchParams} />
+          roleSlot={
+            <Suspense fallback={<RoleSlot role="frontend" />}>
+              <ResolvedRoleSlot searchParams={searchParams} />
             </Suspense>
           }
         />

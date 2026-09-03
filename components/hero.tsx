@@ -6,7 +6,7 @@ import { ROLE_LABEL, type Role } from "@/lib/role";
 import { useEffect, useState, type ReactNode } from "react";
 import Reveal from "./reveal";
 
-export default function Hero({ roleText }: { roleText?: ReactNode }) {
+export default function Hero({ roleSlot }: { roleSlot?: ReactNode }) {
   const lang = useLanguageStore((state) => state.lang);
 
   return (
@@ -14,8 +14,7 @@ export default function Hero({ roleText }: { roleText?: ReactNode }) {
       <Reveal>
         <h1 className="mb-24 max-w-[1200px] break-keep text-4xl font-semibold leading-[1.3] tracking-tight md:mb-32 md:text-5xl lg:text-[4rem]">
           {ui.hero.headline[lang]}
-          {roleText}
-          <RoleRoller lang={lang} />
+          {roleSlot}
           {ui.hero.headlineAfterRole[lang]}
         </h1>
 
@@ -38,12 +37,23 @@ export default function Hero({ roleText }: { roleText?: ReactNode }) {
 }
 
 /**
- * 회전 슬롯 자리에서 실제로 읽히는(스크린리더·텍스트 추출) 단일 역할 명칭.
- * 회전 슬롯은 통째로 aria-hidden이므로 헤드라인 문장은 이 한 단어로 완결된다.
+ * 히어로 문장의 역할 자리. design만 회전 슬롯(디자이너 ⇄ 엔지니어)을 굴리고,
+ * 나머지 역할은 명칭 하나를 정적 텍스트로 보여준다. 회전 시에는 슬롯 전체가
+ * aria-hidden이므로, 추출되는 텍스트는 어느 쪽이든 ROLE_LABEL 하나뿐이다.
  */
-export function SrRole({ role }: { role: Role }) {
+export function RoleSlot({ role }: { role: Role }) {
   const lang = useLanguageStore((state) => state.lang);
-  return <span className="sr-only">{ROLE_LABEL[role][lang]}</span>;
+
+  if (role !== "design") {
+    return <span className="role-static">{ROLE_LABEL[role][lang]}</span>;
+  }
+
+  return (
+    <>
+      <span className="sr-only">{ROLE_LABEL.design[lang]}</span>
+      <RoleRoller lang={lang} />
+    </>
+  );
 }
 
 function RoleRoller({ lang }: { lang: "ko" | "en" }) {

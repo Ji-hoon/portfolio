@@ -49,6 +49,11 @@ summary {
   transform: translateY(0);
 }
 
+/* Static role label shown when the slot doesn't roll (r != design) */
+.role-static {
+  color: #2563eb;
+}
+
 /* Masked vertical role rotation in the hero headline */
 .role-viewport {
   --role-step: 1.3em;
