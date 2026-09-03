@@ -2,7 +2,13 @@
 
 import Image from "next/image";
 import { LuChevronLeft, LuChevronRight, LuX } from "react-icons/lu";
-import { useEffect, useRef, useState, type TouchEvent } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type TouchEvent,
+} from "react";
 
 const ROTATION_INTERVAL = 1800;
 type SwipeTarget = "detail" | "overlay";
@@ -68,22 +74,6 @@ export default function WorkImageCarousel({
     return () => window.clearInterval(timer);
   }, [detail, hasMultiple, isHovered, slides.length]);
 
-  useEffect(() => {
-    if (!isOverlayOpen || !canOpenOverlay) return;
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setIsOverlayOpen(false);
-    };
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    document.addEventListener("keydown", onKeyDown);
-
-    return () => {
-      document.body.style.overflow = originalOverflow;
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [canOpenOverlay, isOverlayOpen]);
-
   const moveDetail = (direction: -1 | 1) => {
     setActiveIndex((current) => {
       const next = Math.min(current, maxDetailIndex) + direction;
@@ -93,11 +83,34 @@ export default function WorkImageCarousel({
     });
   };
 
-  const moveOverlay = (direction: Direction) => {
-    const next = (overlayIndex + direction + slides.length) % slides.length;
-    setOverlayIndex(next);
-    if (isSingleColumnDetail) setActiveIndex(next);
-  };
+  const moveOverlay = useCallback(
+    (direction: Direction) => {
+      const next = (overlayIndex + direction + slides.length) % slides.length;
+      setOverlayIndex(next);
+      if (isSingleColumnDetail) setActiveIndex(next);
+    },
+    [isSingleColumnDetail, overlayIndex, slides.length],
+  );
+
+  useEffect(() => {
+    if (!isOverlayOpen || !canOpenOverlay) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsOverlayOpen(false);
+      /* 좌우 화살표 순환 탐색 — 키보드가 있는 비모바일 환경에서만 발생한다 */
+      if (!hasMultiple) return;
+      if (event.key === "ArrowLeft") moveOverlay(-1);
+      if (event.key === "ArrowRight") moveOverlay(1);
+    };
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [canOpenOverlay, hasMultiple, isOverlayOpen, moveOverlay]);
 
   const moveDetailBySwipe = (direction: Direction) => {
     setActiveIndex((current) =>
