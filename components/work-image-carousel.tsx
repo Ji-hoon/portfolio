@@ -178,7 +178,7 @@ export default function WorkImageCarousel({
   return (
     <>
       <div
-        className={`relative w-full overflow-hidden ${detail ? "aspect-video min-[641px]:aspect-[48/9] min-[961px]:aspect-[64/9] touch-pan-y bg-transparent" : "group/media aspect-video bg-[#2563eb]"}`}
+        className={`relative w-full overflow-hidden ${detail ? "aspect-video min-[641px]:aspect-[48/9] min-[961px]:aspect-[64/9] touch-pan-y bg-transparent" : "aspect-video bg-surface"}`}
         onMouseEnter={() => {
           if (!detail && !isHovered) setActiveIndex(0);
           if (hovered === undefined) setSelfHovered(true);
@@ -214,7 +214,7 @@ export default function WorkImageCarousel({
           {slides.map((src, index) => (
             <div
               key={src}
-              className="relative h-full shrink-0"
+              className={`relative h-full shrink-0 ${detail ? "group/media bg-[#2563eb]" : ""}`}
               style={
                 detail
                   ? { width: `${100 / detailVisibleCount}%` }
@@ -231,7 +231,7 @@ export default function WorkImageCarousel({
                     ? "(max-width: 640px) 100vw, (max-width: 960px) 33vw, 25vw"
                     : "(max-width: 640px) 100vw, (max-width: 960px) 50vw, 33vw"
                 }
-                className={`object-cover ${canOpenOverlay ? "cursor-pointer" : ""} ${detail ? "" : "transition-opacity duration-300 group-hover/media:opacity-50"}`}
+                className={`object-cover ${canOpenOverlay ? "cursor-pointer" : ""} ${detail ? "transition-opacity duration-300 group-hover/media:opacity-50" : ""}`}
                 onClick={(event) => {
                   if (!canOpenOverlay) return;
                   if (didSwipeRef.current) {
