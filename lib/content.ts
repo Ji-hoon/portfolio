@@ -577,7 +577,7 @@ const items: WorkItem[] = [
     id: "project-04",
     type: "project",
     category: "Development",
-    year: "2024",
+    year: "2024-2026",
     image: "https://picsum.photos/seed/logimateerp/1600/1000?grayscale",
     subImages: [
       "https://picsum.photos/seed/logimateerp-design-system/1600/1000?grayscale",
@@ -862,7 +862,8 @@ const items: WorkItem[] = [
     id: "project-07",
     type: "project",
     category: "Development",
-    year: "2024",
+    year: "2025",
+    /* year(표기)만 2025 — 정렬은 sortDate 기준이라 기존 자리를 지킨다 */
     sortDate: "2024.06",
     image: "https://picsum.photos/seed/ftfsite/1600/1000?grayscale",
     subImages: [
