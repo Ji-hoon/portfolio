@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
 import {
+  ROLES,
   ROLE_DESCRIPTION,
   SITE_TITLE,
   SITE_URL,
@@ -35,8 +36,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ko" className={`${inter.variable} antialiased`}>
+    <html
+      lang="ko"
+      className={`${inter.variable} antialiased`}
+      suppressHydrationWarning
+    >
       <head>
+        {/* 첫 페인트 전에 ?r을 html[data-r]로 옮겨 역할 변형이 스치는 것을 막는다 */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.dataset.r=(location.search.match(/[?&]r=(${ROLES.join("|")})(?:&|$)/)||[])[1]||"frontend";`,
+          }}
+        />
         <link
           rel="stylesheet"
           crossOrigin="anonymous"

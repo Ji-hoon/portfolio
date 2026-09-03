@@ -49,9 +49,34 @@ summary {
   transform: translateY(0);
 }
 
+/* 역할 슬롯 시각 레이어: <head> 인라인 스크립트가 첫 페인트 전에 html[data-r]을
+   세팅하고, CSS가 세 변형 중 하나만 남긴다(스크립트 미실행 시 frontend).
+   텍스트는 전부 pseudo-element로 그려 추출·낭독은 h1의 sr-only 명칭만 담당한다. */
+.role-slot > [data-variant] {
+  display: none;
+}
+
+html:not([data-r="design"]):not([data-r="product"])
+  .role-slot
+  > [data-variant="frontend"] {
+  display: inline;
+}
+
+html[data-r="design"] .role-slot > [data-variant="design"] {
+  display: inline;
+}
+
+html[data-r="product"] .role-slot > [data-variant="product"] {
+  display: inline;
+}
+
 /* Static role label shown when the slot doesn't roll (r != design) */
 .role-static {
   color: #2563eb;
+}
+
+.role-static::after {
+  content: attr(data-label);
 }
 
 /* Masked vertical role rotation in the hero headline */
