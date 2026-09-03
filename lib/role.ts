@@ -1,6 +1,9 @@
 export const ROLES = ["frontend", "design", "product"] as const;
 export type Role = (typeof ROLES)[number];
 
+/** 사이트 공통 title — 역할과 무관하게 고정, layout과 og/twitter가 공유한다. */
+export const SITE_TITLE = "Jihoon Kim";
+
 const isRole = (value: unknown): value is Role =>
   typeof value === "string" && (ROLES as readonly string[]).includes(value);
 

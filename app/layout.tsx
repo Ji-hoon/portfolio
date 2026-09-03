@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
+import { ROLE_DESCRIPTION, SITE_TITLE } from "@/lib/role";
 import { Providers } from "@/components/providers";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -21,9 +22,8 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "김지훈 — Product Designer / Engineer",
-  description:
-    "10+년의 프로덕트 디자인 경험 위에서 사용자 경험과 비즈니스 요구사항을 함께 설계하고 구현합니다.",
+  title: SITE_TITLE,
+  description: ROLE_DESCRIPTION.frontend,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
