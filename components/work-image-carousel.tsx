@@ -272,11 +272,28 @@ export default function WorkImageCarousel({
         </div>
 
         {hasMultiple && !detail && (
-          <div className="absolute inset-x-0 bottom-0 z-10 h-1 bg-black/15">
+          /* 진행 바는 호버에만 하단에서 올라온다. 지나간 구간은 스냅으로 채우고,
+             현재 구간은 로테이션 간격만큼 linear로 채워 이미지 전환 순간과 만난다.
+             세그먼트는 key 리마운트로 인덱스 틱마다 애니메이션을 다시 시작한다.
+             호버가 없는 터치 기기(pointer-coarse)에서는 제공하지 않는다. */
+          <div
+            className={`absolute inset-x-0 bottom-0 z-10 flex h-1 bg-black/15 transition-transform duration-300 ease-out pointer-coarse:hidden ${isHovered ? "translate-y-0" : "translate-y-full"}`}
+          >
             <div
-              className="h-full bg-ink transition-[width] duration-500 ease-out"
+              className="h-full bg-ink"
               style={{
-                width: `${((visibleCardIndex + 1) / slides.length) * 100}%`,
+                width: `${(visibleCardIndex / slides.length) * 100}%`,
+              }}
+            />
+            <div
+              key={visibleCardIndex}
+              className="h-full origin-left bg-ink"
+              style={{
+                width: `${100 / slides.length}%`,
+                transform: "scaleX(0)",
+                animation: isHovered
+                  ? `card-progress ${ROTATION_INTERVAL}ms linear forwards`
+                  : undefined,
               }}
             />
           </div>

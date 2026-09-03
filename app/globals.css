@@ -158,6 +158,16 @@ html[data-r="product"] .role-slot > [data-variant="product"] {
   animation: dropdown-in 0.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* 카드 캐러셀 진행 바 — 현재 슬라이드 구간을 로테이션 간격과 같은 시간 동안 채운다 */
+@keyframes card-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 /* Work card hover lift */
 .work-card {
   transition: transform 0.3s ease-out;

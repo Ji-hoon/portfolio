@@ -52,8 +52,9 @@ export default function WorkCard({
       ) : null}
       <div>
         <div>
+          {/* 카드 호버 포커스는 타이틀에만 — 카테고리·연도·요약은 그대로 둔다 */}
           <h3
-            className={`${showImage ? "text-base md:text-lg" : "text-xl md:text-2xl"} font-bold text-ink`}
+            className={`${showImage ? "text-base md:text-lg" : "text-xl md:text-2xl"} font-bold text-ink transition-colors group-hover:text-blue-600`}
           >
             {item.title[lang]}
           </h3>
