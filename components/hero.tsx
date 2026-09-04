@@ -11,7 +11,10 @@ export default function Hero({ srRole }: { srRole?: ReactNode }) {
   const lang = useLanguageStore((state) => state.lang);
 
   return (
-    <section id="home" className="mb-32 scroll-mt-28 pt-16 md:mb-48 md:pt-24">
+    <section
+      id="home"
+      className="relative mb-32 scroll-mt-28 pt-16 md:mb-48 md:pt-24"
+    >
       <Reveal>
         <h1 className="mb-24 max-w-[1200px] break-keep font-semibold leading-[1.3] tracking-tight md:mb-32 text-[2rem] md:text-[3rem] lg:text-[4rem]">
           {ui.hero.headline[lang]}
@@ -34,6 +37,10 @@ export default function Hero({ srRole }: { srRole?: ReactNode }) {
           </div>
         </div>
       </Reveal>
+      {/* 리빌 전 로딩 휠 — .reveal의 바로 다음 형제여야 CSS 인접 선택자가 잡는다 */}
+      <span aria-hidden="true" className="hero-spinner">
+        <span className="hero-spinner-ring" />
+      </span>
       <Suspense fallback={null}>
         <RoleSync />
       </Suspense>
