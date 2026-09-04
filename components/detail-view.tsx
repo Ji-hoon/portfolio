@@ -252,7 +252,7 @@ export default function DetailView({ id }: { id: string }) {
             <dt className="mb-1 font-medium text-muted">
               {labels.relatedLink[lang]}
             </dt>
-            <dd className="flex flex-col gap-1">
+            <dd className="flex flex-wrap gap-x-4 gap-y-1">
               {item.relatedLinks.map((link) => (
                 <a
                   key={link}
