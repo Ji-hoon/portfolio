@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { LuChevronLeft, LuChevronRight, LuX } from "react-icons/lu";
+import { LuChevronLeft, LuChevronRight, LuImage, LuX } from "react-icons/lu";
 import {
   useCallback,
   useEffect,
@@ -31,7 +31,8 @@ export default function WorkImageCarousel({
   const [overlayIndex, setOverlayIndex] = useState(0);
   const [detailVisibleCount, setDetailVisibleCount] = useState(1);
   const [selfHovered, setSelfHovered] = useState(false);
-  /* 틴트 배경은 이미지 로딩 완료 && 호버에만 — 로딩 중이나 비호버에 파란 박스가 비치지 않도록 */
+  /* 로딩 완료된 src 추적 — 미완료 슬라이드는 스켈레톤(펄스 + 아이콘)을 보여주고,
+     디테일 호버 틴트도 로딩 완료 후에만 켠다 (파란 박스가 먼저 비치지 않도록) */
   const [loadedSrcs, setLoadedSrcs] = useState<Set<string>>(new Set());
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
@@ -236,6 +237,11 @@ export default function WorkImageCarousel({
                   : { width: "100%" }
               }
             >
+              {!loadedSrcs.has(src) && (
+                <div className="pointer-events-none absolute inset-0 flex animate-pulse items-center justify-center bg-surface">
+                  <LuImage aria-hidden size={28} className="text-muted/50" />
+                </div>
+              )}
               <Image
                 src={src}
                 alt={`${alt} (${index + 1}/${slides.length})`}
@@ -246,14 +252,11 @@ export default function WorkImageCarousel({
                     ? "(max-width: 640px) 100vw, (max-width: 960px) 33vw, 25vw"
                     : "(max-width: 640px) 100vw, (max-width: 960px) 50vw, 33vw"
                 }
-                className={`object-cover ${canOpenOverlay ? "cursor-pointer" : ""} ${detail ? "transition-opacity duration-300 group-hover/media:opacity-70" : ""}`}
-                onLoad={
-                  detail
-                    ? () =>
-                        setLoadedSrcs((prev) =>
-                          prev.has(src) ? prev : new Set(prev).add(src),
-                        )
-                    : undefined
+                className={`object-cover transition-opacity duration-300 ${loadedSrcs.has(src) ? "" : "opacity-0"} ${canOpenOverlay ? "cursor-pointer" : ""} ${detail ? "group-hover/media:opacity-70" : ""}`}
+                onLoad={() =>
+                  setLoadedSrcs((prev) =>
+                    prev.has(src) ? prev : new Set(prev).add(src),
+                  )
                 }
                 onClick={(event) => {
                   if (!canOpenOverlay) return;
