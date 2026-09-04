@@ -168,6 +168,37 @@ html[data-r="product"] .role-slot > [data-variant="product"] {
   }
 }
 
+/* 이미지 스켈레톤 진행 바 — 실제 다운로드 진행률은 img 요소가 노출하지 않으므로,
+   빠르게 차오르다 92%에서 감속·대기하는 시뮬레이션. 로드 완료 시 스켈레톤째 사라진다 */
+@keyframes image-loading {
+  0% {
+    transform: scaleX(0);
+  }
+  10% {
+    transform: scaleX(0.4);
+  }
+  30% {
+    transform: scaleX(0.65);
+  }
+  60% {
+    transform: scaleX(0.8);
+  }
+  100% {
+    transform: scaleX(0.92);
+  }
+}
+
+.image-progress {
+  animation: image-loading 6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-progress {
+    animation: none;
+    transform: scaleX(0.6);
+  }
+}
+
 /* Work card hover lift */
 .work-card {
   transition: transform 0.3s ease-out;

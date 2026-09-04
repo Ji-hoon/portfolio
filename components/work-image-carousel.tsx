@@ -238,8 +238,11 @@ export default function WorkImageCarousel({
               }
             >
               {!loadedSrcs.has(src) && (
-                <div className="pointer-events-none absolute inset-0 flex animate-pulse items-center justify-center bg-surface">
+                <div className="pointer-events-none absolute inset-0 flex animate-pulse flex-col items-center justify-center gap-3 bg-surface">
                   <LuImage aria-hidden size={28} className="text-muted/50" />
+                  <div className="h-0.5 w-16 overflow-hidden rounded-full bg-muted/25">
+                    <div className="image-progress h-full w-full origin-left rounded-full bg-muted/70" />
+                  </div>
                 </div>
               )}
               <Image
