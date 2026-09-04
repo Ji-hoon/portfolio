@@ -44,7 +44,7 @@ export interface WorkItem {
   };
   accomplishments: { ko: string[]; en: string[] };
   role: LText;
-  relatedLink: string | null;
+  relatedLinks: string[];
   details: { ko: string[]; en: string[] };
   technicalChallenges?: { ko: string[]; en: string[] };
   architecture?: ArchitectureContent;
@@ -180,7 +180,7 @@ const items: WorkItem[] = [
       ko: "기획·설계 주도, AI 에이전트 협업 구현",
       en: "Led product definition & architecture; built with AI agents",
     },
-    relatedLink: null, //PORTFOLIO_URL,
+    relatedLinks: [], //PORTFOLIO_URL,
     details: {
       ko: [
         "화면을 찾아 들어가 하던 일을 문장으로 요청하는 것을 제품 정의로 잡았습니다. 기능 범위와 상호작용 패턴, 아키텍처 방향과 운영 경계를 정의하고 구현은 AI 에이전트와의 협업으로 진행했습니다.",
@@ -328,7 +328,7 @@ const items: WorkItem[] = [
       ko: "요구사항 정의·우선순위 판단, LLM 기반 코드 생성 파이프라인 구축",
       en: "Defined requirements & priorities; built the LLM-based codegen pipeline",
     },
-    relatedLink: null, //PORTFOLIO_URL,
+    relatedLinks: [], //PORTFOLIO_URL,
     details: {
       ko: [
         "운영 중인 ERP 서비스의 E2E 테스트를 AI 에이전트가 자동 수행하고, 결과 시각화와 리포트 웹훅 발행까지 담당하는 내부 도구와 워크플로우를 구축했습니다.",
@@ -470,7 +470,7 @@ const items: WorkItem[] = [
       ko: "프론트엔드 아키텍처·레지스트리 설계, AI 에이전트 개발 파이프라인 구축",
       en: "Designed the frontend architecture and registry; built the AI-agent development pipeline",
     },
-    relatedLink: null, // PORTFOLIO_URL,
+    relatedLinks: [], // PORTFOLIO_URL,
     details: {
       ko: [
         "MoviqAI 플랫폼용 엔터프라이즈 React SPA를 Vite 기반으로 구축했습니다. 2026년 4월 14일부터 6월 4일까지 83개 커밋으로 현재 src 58,453줄·449파일 규모를 만들었습니다.",
@@ -611,7 +611,7 @@ const items: WorkItem[] = [
       ko: "프론트엔드 개발 · 개발팀",
       en: "Frontend Developer · Dev Team",
     },
-    relatedLink: "https://main1.moviqai.com",
+    relatedLinks: ["https://main1.moviqai.com"],
     details: {
       ko: [
         "택배, 주문, 재고 관리 등 물류 운영을 위한 Fulfillment 기능을 제공하는 ERP 웹 서비스입니다. Home-in Fulfillment System(ERP)의 프론트엔드를 담당하며, AI 에이전트를 개발 프로세스에 편입시키고 제품에 AI 어시스턴트를 도입하는 작업을 주도하고 있습니다.",
@@ -757,7 +757,7 @@ const items: WorkItem[] = [
       ko: "개인 프로젝트 · 단독 개발",
       en: "Personal project · solo development",
     },
-    relatedLink: "https://savebudget.app",
+    relatedLinks: ["https://savebudget.app"],
     details: {
       ko: [
         "가계부를 부탁해!는 지출과 자산을 함께 관리하는 개인 프로젝트입니다. 클라이언트와 서버를 하나의 모놀리식 리포지토리로 구성하고, 프로젝트 요구사항을 충족하는 API와 데이터 스키마를 직접 설계했습니다.",
@@ -896,7 +896,7 @@ const items: WorkItem[] = [
       ko: "기획부터 배포까지 바이브코딩으로 단독 진행",
       en: "Solo vibe coding, from planning to deployment",
     },
-    relatedLink: "https://ftf.co.kr",
+    relatedLinks: ["https://ftf.co.kr"],
     details: {
       ko: [
         "이 프로젝트는 회사 소개·솔루션 홍보용 랜딩페이지로 시작했지만, 이후 도입문의·고객지원·CS 답변을 처리하는 사내 운영 도구까지 같은 저장소 안에서 확장되었습니다. 방문자용 화면과 운영자용 화면은 목적과 권한을 분리하되 하나의 서비스 운영 흐름으로 연결했습니다.",
@@ -1041,7 +1041,7 @@ const items: WorkItem[] = [
       ko: "팀 프로젝트 — 인증 API·소셜 로그인·배포 담당",
       en: "Team project — auth API, social login, and deployment",
     },
-    relatedLink: "https://youtu.be/vghjojw3kCY",
+    relatedLinks: ["https://youtu.be/vghjojw3kCY"],
     details: {
       ko: [
         "엘리스트랙 SW엔지니어 트랙 7기에서 React, TypeScript, Node.js, MongoDB 기반 교육 과정을 수강하며 팀 프로젝트를 진행했습니다.",
@@ -1185,7 +1185,7 @@ const items: WorkItem[] = [
       ko: "Product Designer",
       en: "Product Designer",
     },
-    relatedLink: "https://miricanvas.com", //PORTFOLIO_URL,
+    relatedLinks: ["https://miricanvas.com"], //PORTFOLIO_URL,
     details: {
       ko: [
         "미리캔버스의 유료 요금제 전환을 목표로 가입, 구독 신청, 결제, 해지 경험을 개선한 프로젝트입니다.",
@@ -1252,7 +1252,7 @@ const items: WorkItem[] = [
       ko: "UI/UX 디자이너",
       en: "UI/UX Designer",
     },
-    relatedLink: null, // PORTFOLIO_URL,
+    relatedLinks: [], // PORTFOLIO_URL,
     details: {
       ko: [
         "작가 정보, 작품, 스토리, 경매 콘텐츠를 담아 전통 공예를 소개하고 판매하는 글로벌 플랫폼 Tradipod의 Mobile Web UI Design을 담당했습니다.",
@@ -1335,7 +1335,14 @@ const items: WorkItem[] = [
       ko: "UI/UX 디자이너",
       en: "UI/UX Designer",
     },
-    relatedLink: "https://jandi.com", //PORTFOLIO_URL,
+    relatedLinks: [
+      "https://jandi.com",
+      "https://vimeo.com/185894987",
+      "https://vimeo.com/207106348",
+      "https://vimeo.com/207108167",
+      "https://vimeo.com/231481808",
+      "https://vimeo.com/229242969",
+    ],
     details: {
       ko: [
         "JANDI는 아시아 시장을 타깃으로 한 기업용 메시징 플랫폼입니다. JANDI 웹 애플리케이션의 인터페이스 디자인과 개선 작업, 랜딩 페이지의 서브 페이지와 애니메이션 구현을 담당했습니다.",
@@ -1392,7 +1399,7 @@ const items: WorkItem[] = [
       ],
     },
     role: { ko: "UI/UX 디자이너", en: "UI/UX Designer" },
-    relatedLink: null, // PORTFOLIO_URL,
+    relatedLinks: [], // PORTFOLIO_URL,
     details: {
       ko: [
         "IUEditor는 Mac OS X용 드래그 앤 드롭 기반 웹 에디터 프로그램입니다. 소프트웨어의 인터페이스 정보 구조와 디자인을 중심으로 샘플 웹페이지, 위젯 프로토타입, 브로슈어와 마케팅 자료를 제작했습니다.",
@@ -1447,7 +1454,7 @@ const items: WorkItem[] = [
       ],
     },
     role: { ko: "UI/UX 디자이너", en: "UI/UX Designer" },
-    relatedLink: null, // PORTFOLIO_URL,
+    relatedLinks: ["https://vimeo.com/163916296"],
     details: {
       ko: [
         "Bargain Hunter는 국내 쇼퍼를 위한 위치 기반 모바일 애플리케이션입니다. 사용자의 현재 위치 주변에서 제한된 기간 동안 제공되는 핫딜 정보를 확인할 수 있도록 설계했습니다.",
@@ -1485,7 +1492,7 @@ const items: WorkItem[] = [
       en: ["Designed key screens and purchase experience for the web store"],
     },
     role: { ko: "Web Design", en: "Web Design" },
-    relatedLink: null, //PORTFOLIO_URL,
+    relatedLinks: [], //PORTFOLIO_URL,
     details: {
       ko: ["2023 포트폴리오에 수록된 과거 프로젝트입니다."],
       en: ["A past project included in the 2023 portfolio."],
@@ -1543,7 +1550,7 @@ const items: WorkItem[] = [
       ],
     },
     role: { ko: "UI 디자이너", en: "UI Designer" },
-    relatedLink: null, // PORTFOLIO_URL,
+    relatedLinks: [], // PORTFOLIO_URL,
     details: {
       ko: [
         "BlackBerry Z10을 위한 뮤직 플레이어 애플리케이션 콘셉트 디자인입니다. 소셜 네트워크 서비스를 포함한 새로운 음악 플레이어를 구상하고, 세 가지 메뉴와 스와이프 제스처로 쉽게 사용할 수 있는 흐름을 설계했습니다.",
@@ -1604,7 +1611,7 @@ const items: WorkItem[] = [
       ko: "인터랙션·모션 디자이너",
       en: "Interaction & Motion Designer",
     },
-    relatedLink: null, // PORTFOLIO_URL,
+    relatedLinks: ["https://youtu.be/zbJNhR1dSUU?t=4m54s"],
     details: {
       ko: [
         "PRISM UX는 독일 소비자 가전 시장을 위해 디자인한 차세대 셋톱박스 인터페이스입니다. 타깃 제품인 홈 미디어 서버는 N-screen, 검색 연관 콘텐츠, 4튜너 녹화 기능을 제공합니다.",

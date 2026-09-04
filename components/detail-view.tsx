@@ -16,6 +16,17 @@ import WorkImageCarousel from "./work-image-carousel";
 
 const TOC_FOCUS_RATIO = 0.5;
 
+/** 연관 링크 라벨은 호스트명 — 같은 호스트가 여러 개면(영상 목록) 순번을 붙인다 */
+function relatedLinkLabel(links: string[], link: string) {
+  const hostname = new URL(link).hostname;
+  const sameHost = links.filter(
+    (other) => new URL(other).hostname === hostname,
+  );
+  return sameHost.length > 1
+    ? `${hostname} ${sameHost.indexOf(link) + 1}`
+    : hostname;
+}
+
 function getHeaderOffset() {
   return document.querySelector("header")?.getBoundingClientRect().bottom ?? 0;
 }
@@ -236,21 +247,24 @@ export default function DetailView({ id }: { id: string }) {
             ))}
           </dd>
         </div>
-        {item.relatedLink ? (
+        {item.relatedLinks.length > 0 ? (
           <div>
             <dt className="mb-1 font-medium text-muted">
               {labels.relatedLink[lang]}
             </dt>
-            <dd>
-              <a
-                href={item.relatedLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 font-medium transition-colors hover:text-blue-600"
-              >
-                {new URL(item.relatedLink).hostname}
-                <ArrowUpRight size={14} />
-              </a>
+            <dd className="flex flex-col gap-1">
+              {item.relatedLinks.map((link) => (
+                <a
+                  key={link}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-medium transition-colors hover:text-blue-600"
+                >
+                  {relatedLinkLabel(item.relatedLinks, link)}
+                  <ArrowUpRight size={14} />
+                </a>
+              ))}
             </dd>
           </div>
         ) : null}
