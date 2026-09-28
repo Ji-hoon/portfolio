@@ -15,6 +15,23 @@ export const ProductSummary = z
   .meta({ id: "ProductSummary" });
 export type ProductSummary = z.infer<typeof ProductSummary>;
 
+export const ProductDetail = ProductSummary.extend({
+  description: z.string(),
+  category: z.string(),
+  images: z.array(z.url()),
+  stock: z.number().int(),
+  availabilityStatus: z.string().optional(),
+  shippingInformation: z.string().optional(),
+  warrantyInformation: z.string().optional(),
+  returnPolicy: z.string().optional(),
+}).meta({ id: "ProductDetail" });
+export type ProductDetail = z.infer<typeof ProductDetail>;
+
+export const ProductIdParam = z.object({
+  id: z.coerce.number().int().min(1).meta({ description: "Product id" }),
+});
+export type ProductIdParam = z.infer<typeof ProductIdParam>;
+
 // Query strings arrive as text, so coerce before range checks.
 export const ProductListQuery = z
   .object({

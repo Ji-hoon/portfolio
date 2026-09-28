@@ -1,6 +1,11 @@
 import { createDocument } from "zod-openapi";
 import { ErrorResponse } from "./schemas/common";
-import { ProductListQuery, ProductListResponse } from "./schemas/product";
+import {
+  ProductDetail,
+  ProductIdParam,
+  ProductListQuery,
+  ProductListResponse,
+} from "./schemas/product";
 
 const errorContent = { "application/json": { schema: ErrorResponse } };
 
@@ -29,6 +34,32 @@ export const openApiDocument = createDocument({
           },
           "400": {
             description: "잘못된 쿼리 파라미터 (VALIDATION_ERROR)",
+            content: errorContent,
+          },
+          "502": {
+            description: "DummyJSON 호출 실패 (UPSTREAM_ERROR)",
+            content: errorContent,
+          },
+        },
+      },
+    },
+    "/api/products/{id}": {
+      get: {
+        operationId: "getProduct",
+        tags: ["products"],
+        summary: "상품 상세",
+        requestParams: { path: ProductIdParam },
+        responses: {
+          "200": {
+            description: "상품 상세",
+            content: { "application/json": { schema: ProductDetail } },
+          },
+          "400": {
+            description: "잘못된 id (VALIDATION_ERROR)",
+            content: errorContent,
+          },
+          "404": {
+            description: "상품 없음 (NOT_FOUND)",
             content: errorContent,
           },
           "502": {

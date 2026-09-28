@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const ErrorCode = z
-  .enum(["VALIDATION_ERROR", "UPSTREAM_ERROR"])
+  .enum(["VALIDATION_ERROR", "NOT_FOUND", "UPSTREAM_ERROR"])
   .meta({ id: "ErrorCode" });
 export type ErrorCode = z.infer<typeof ErrorCode>;
 
