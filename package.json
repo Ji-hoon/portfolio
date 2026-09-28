@@ -10,6 +10,7 @@
     "upload-assets": "node --env-file=.env.local scripts/upload-assets.mjs"
   },
   "dependencies": {
+    "@scalar/nextjs-api-reference": "^0.9.26",
     "@supabase/storage-js": "^2.109.0",
     "@tanstack/react-query": "^5.102.4",
     "next": "16.3.3",
@@ -17,6 +18,8 @@
     "react-dom": "19.2.8",
     "react-icons": "^5.7.0",
     "server-only": "^0.0.1",
+    "zod": "^4.6.5",
+    "zod-openapi": "^5.4.6",
     "zustand": "^5.0.15"
   },
   "devDependencies": {
